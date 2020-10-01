@@ -42,7 +42,7 @@ exports.signup = (req, res, next) => {
                             jwt.sign(
                                 {id: user.id},process.env.AUTH_SECRET_KEY,
                                 {expiresIn: "12h"}, (err, token) => {
-                                    return res.status(200).json({token,user})
+                                    return res.status(200).json({token,user,msg: "Accounted created successfully"})
                                 }
                             )
                         })
@@ -79,7 +79,7 @@ exports.login = (req, res, next) => {
                         return res.httpStatus.BAD_REQUEST.json({ msg: err.message || "Invalid Password" });
                     }
                     jwt.sign({id: user.id}, process.env.AUTH_SECRET_KEY, {expiresIn:"12h"}, (err, token) => {
-                        return res.status(200).json({token,user})
+                        return res.status(200).json({token,user, msg: "User logged in successfully"})
                      })
                 })
                 .catch(err => res.json({ msg: err.message || "Failed to login"}))
