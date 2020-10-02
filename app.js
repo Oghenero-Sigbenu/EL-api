@@ -21,6 +21,9 @@ app.use('*', (req, res, next) => {
 // develoment error handler
 app.use((err, req, res, next) => {
     if (process.env.NODE_ENV == "production") {
+        app.get("*", (req, res) => {
+            res.send("Hello LERO")
+        })
         return next(err)
     }
     return res.json({ message: err.message || "an error occured", error: err });
